@@ -23,22 +23,24 @@ export default class Modal {
     document.body.style.overflow = "hidden";
   };
 
+  _postData = async (url) => {
+    this._res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: this._json
+    });
+
+    return await this._res.json();
+  }
+
   _sendMessage = (form) => {
     form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._formDate = new FormData(form);
-      this._object = {};
-      this._formDate.forEach((value, key) => {
-        this._object[key] = value;
-      });
-      fetch("server.php", {
-        method: "POST",
-        body: JSON.stringify(this._object),
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-        .then((data) => data.text())
+      this._json = JSON.stringify(Object.fromEntries(this._formDate.entries()));
+        this._postData('http://localhost:3000/requests')
         .then((data) => {
           console.log(data);
           this._closePopup();

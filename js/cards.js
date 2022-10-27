@@ -1,30 +1,33 @@
 export default class Card {
-  constructor(
-    selector,
-    { img, alt, subtitle, descr, cost, total, currency } = item
-  ) {
+  constructor(selector) {
     this._selector = selector;
-    this._img = img;
-    this._alt = alt;
-    this._subtitle = subtitle;
-    this._descr = descr;
-    this._cost = cost;
-    this._total = total;
-    this._currency = currency;
   }
 
-  render() {
-    this._selector.innerHTML += `
+  _getData = async (url) => {
+    this._res = await fetch(url);
+    if (!this._res.ok) {
+      throw new Error("Error!");
+    }
+
+    return await this._res.json();
+  };
+
+  render = () => {
+     this._getData("http://localhost:3000/menu").then((data) =>
+      data.forEach((obj) => {
+        this._selector.innerHTML += `
       <div class="menu__item">
-            <img src="${this._img}" alt=${this._alt}>
-            <h3 class="menu__item-subtitle">${this._subtitle}</h3>
-            <div class="menu__item-descr">${this._descr}</div>
+            <img src="${obj.img}" alt=${obj.altimg}>
+            <h3 class="menu__item-subtitle">${obj.title}</h3>
+            <div class="menu__item-descr">${obj.descr}</div>
             <div class="menu__item-divider"></div>
             <div class="menu__item-price">
-                <div class="menu__item-cost">${this._cost}</div>
-                <div class="menu__item-total"><span>${this._total}</span> ${this._currency}</div>
+                <div class="menu__item-cost">Цена</div>
+                <div class="menu__item-total"><span>${obj.price * 27}</span> грн/день</div>
             </div>
         </div>
         `;
-  }
+      })
+    );
+  };
 }

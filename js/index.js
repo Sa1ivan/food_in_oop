@@ -1,5 +1,4 @@
 import {
-  settings,
   container,
   tabsContent,
   tabs,
@@ -7,24 +6,23 @@ import {
   timerSelectors,
   deadline,
   modalSettings,
+  sliderUtils,
 } from "./utils.js";
 import Card from "./cards.js";
 import Tab from "./tabs.js";
 import Timer from "./timer.js";
 import Modal from "./modal.js";
-//cards
+import Slider from "./slider.js";
 
-settings.forEach((item) => {
-  const card = new Card(container, item);
-  card.render();
-});
+// cards
+const card = new Card(container);
+card.render();
 
-//tabs
-
+// tabs
 const tab = new Tab(tabsContent, tabs, tabsParent);
 tab.playTabs();
 
-//timer
+// timer
 const { selector, days, hours, minutes, seconds } = timerSelectors;
 const timer = new Timer(selector, deadline);
 let newTimer;
@@ -47,3 +45,7 @@ setInterval(() => {
 const { openBtn, closeBtn, popup, forms } = modalSettings;
 const modal = new Modal(openBtn, closeBtn, popup, forms);
 modal.render();
+
+// slider
+const slider = new Slider({ ...sliderUtils });
+slider.render();
