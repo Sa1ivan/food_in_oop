@@ -41,8 +41,7 @@ export default class Modal {
       this._formDate = new FormData(form);
       this._json = JSON.stringify(Object.fromEntries(this._formDate.entries()));
         this._postData('http://localhost:3000/requests')
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           this._closePopup();
         })
         .catch(() => {

@@ -7,12 +7,14 @@ import {
   deadline,
   modalSettings,
   sliderUtils,
+  calcUnits,
 } from "./utils.js";
 import Card from "./cards.js";
 import Tab from "./tabs.js";
 import Timer from "./timer.js";
 import Modal from "./modal.js";
 import Slider from "./slider.js";
+import Calc from "./calc.js";
 
 // cards
 const card = new Card(container);
@@ -49,3 +51,7 @@ modal.render();
 // slider
 const slider = new Slider({ ...sliderUtils });
 slider.render();
+
+// calc
+const calc = new Calc({ ...calcUnits });
+calc.render();

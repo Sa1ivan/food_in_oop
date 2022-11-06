@@ -34,3 +34,17 @@ export const sliderUtils = {
   next: document.querySelector(".next"),
   prev: document.querySelector(".prev"),
 };
+
+// calc
+
+export const calcUnits = {
+  female: document.querySelector(".female"),
+  male: document.querySelector(".male"),
+  age: document.querySelector("#age"),
+  height: document.querySelector("#height"),
+  weight: document.querySelector("#weight"),
+  params: document.querySelectorAll(".calculating__choose_big div"),
+  result: document.querySelector(".calculating__result span"),
+  inputs: document.querySelectorAll('.calculating__choose_medium input'),
+  genders: document.querySelectorAll('#gender div'),
+};
